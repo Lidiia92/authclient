@@ -10,6 +10,13 @@ const Input = styled(FormControl)`
     width: 600px;
 `;
 
+const FormWrapper = styled.div`
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+`;
+
 
 class Login extends Component {
 
@@ -51,7 +58,7 @@ class Login extends Component {
 
     render(){
         return (
-            
+            <FormWrapper>
                 <Form horizontal onSubmit={this.handleSubmit}>
                 <FormGroup controlId="formHorizontalEmail">
                     <Col componentClass={ControlLabel} sm={2}>
@@ -85,7 +92,7 @@ class Login extends Component {
                     </Col>
                 </FormGroup>
                 </Form>
-          
+            </FormWrapper>
         );
     }
   };

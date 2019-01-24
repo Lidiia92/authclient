@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { ListGroup, ListGroupItem  } from 'react-bootstrap';
+import styled from 'styled-components';
+
+const UsersWrapper = styled.div`
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+`;
 
 
 class UsersList extends Component {
-
-  // async componentDidMount() {
-  //   try {
-  //     const endpoint = 'http://localhost5000/api/users';
-  //     const response = await fetch(endpoint);
-  //     const json = await response.json();
-  //     console.log(json);
-  //   }
-  //   catch(err) {
-  //     console.error('ERR', err)
-  //   }
-  // }
+    state = {
+      users: []
+    }
 
   componentDidMount(){
       this.getData();
@@ -33,6 +32,9 @@ class UsersList extends Component {
       const res = await axios.get(endpoint, options);
       const { data } = await res;
       console.log(data)
+      this.setState({
+        users: res.data.users
+      })
     }
     catch (err) {
       console.error('ERR', err)
@@ -41,9 +43,11 @@ class UsersList extends Component {
 
   render() {
     return (
-      <div >
-          Users
-      </div>
+      <UsersWrapper >
+          <ListGroup>
+            {this.state.users.map (user => <ListGroupItem key={user.id} header={user.username}><strong>Department:</strong> {user.department}</ListGroupItem>)}
+          </ListGroup>;
+      </UsersWrapper>
     );
   }
 }
