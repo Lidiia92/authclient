@@ -13,6 +13,10 @@ class App extends Component {
     window.location.reload();
   }
 
+  visitPage = () => {
+    window.location='http://localhost:3000/users';
+  }
+
   render() {
     return (
       <div >
@@ -29,11 +33,11 @@ class App extends Component {
 
         <Route 
           path="/login" 
-          render={props => <Login /> } /> 
+          render={props => <Login visitpage={this.visitPage}/> } /> 
 
         <Route 
           path="/register" 
-          render={props => <Register /> } /> 
+          render={props => <Register visitpage={this.visitPage}/> } /> 
 
         </main>
       </div>

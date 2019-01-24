@@ -35,6 +35,7 @@ class Register extends Component {
             console.log('test', data);
             localStorage.setItem('jwtToken', res.data.token);
             this.clearState();
+            this.props.visitpage();
         }
         catch(err){
             console.log('ERROR', err);
