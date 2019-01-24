@@ -1,4 +1,5 @@
-import React from "react";
+import React, {Component} from "react";
+import axios from 'axios';
 import { Form,  FormGroup, Col, FormControl, Button, ControlLabel  } from 'react-bootstrap';
 import styled from 'styled-components';
 import '../App.css';
@@ -10,37 +11,83 @@ const Input = styled(FormControl)`
 `;
 
 
-const Login = props => {
-    return (
+class Login extends Component {
+
+    state = {
+        username: '',
+        password: ''
+    }
+
+    handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const endpoint = 'http://localhost:5000/api/login';
+            const res = await axios.post(endpoint, this.state);
+            const { data } = await res;
+            console.log('test', data);
+            localStorage.setItem('jwtToken', res.data.token);
+            this.clearState();
+        }
+        catch(err){
+            console.log('ERROR', err);
+        }
         
-            <Form horizontal>
-            <FormGroup controlId="formHorizontalEmail">
-                <Col componentClass={ControlLabel} sm={2}>
-                Email
-                </Col>
-                <Col sm={10}>
-                <Input type="email" placeholder="Email" />
-                </Col>
-            </FormGroup>
+    }
 
-            <FormGroup controlId="formHorizontalPassword">
-                <Col componentClass={ControlLabel} sm={2}>
-                Password
-                </Col>
-                <Col sm={10}>
-                <Input type="password" placeholder="Password" />
-                </Col>
-            </FormGroup>
+    handleChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name] : value
+        })
+    }
+
+    clearState = () => {
+        this.setState({
+            username: '',
+            password: ''
+        })
+    }
 
 
-            <FormGroup>
-                <Col smOffset={2} sm={10}>
-                <Button type="submit">Sign in</Button>
-                </Col>
-            </FormGroup>
-            </Form>
-      
-    );
+    render(){
+        return (
+            
+                <Form horizontal onSubmit={this.handleSubmit}>
+                <FormGroup controlId="formHorizontalEmail">
+                    <Col componentClass={ControlLabel} sm={2}>
+                    Username
+                    </Col>
+                    <Col sm={10}>
+                    <Input type="text" 
+                        name="username"
+                        value={this.state.username} 
+                        onChange={this.handleChange}
+                        placeholder="Username" />
+                    </Col>
+                </FormGroup>
+    
+                <FormGroup controlId="formHorizontalPassword">
+                    <Col componentClass={ControlLabel} sm={2}>
+                    Password
+                    </Col>
+                    <Col sm={10}>
+                    <Input type="password" 
+                        name="password"
+                        value={this.state.password} 
+                        onChange={this.handleChange}
+                        placeholder="Password" />
+                    </Col>
+                </FormGroup>
+    
+                <FormGroup>
+                    <Col smOffset={2} sm={10}>
+                    <Button type="submit">Sign in</Button>
+                    </Col>
+                </FormGroup>
+                </Form>
+          
+        );
+    }
   };
   
   export default Login;

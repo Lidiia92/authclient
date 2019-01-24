@@ -15,7 +15,7 @@ const NavigationBar = props => {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav>
-          <NavItem eventKey={1} href="#">
+          <NavItem eventKey={1} href="/login">
             Log in
           </NavItem>
           <NavItem eventKey={2} href="#">
