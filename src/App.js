@@ -6,11 +6,17 @@ import Login from './components/Login';
 import { Route } from 'react-router-dom';
 
 class App extends Component {
+
+  signout = () => {
+    localStorage.removeItem('jwtToken');
+    window.location.reload();
+  }
+
   render() {
     return (
       <div >
         <header>
-          <NavBar />
+          <NavBar signout={this.signout}/>
         </header>
         <main>
 

@@ -26,6 +26,9 @@ const NavigationBar = props => {
           <NavItem eventKey={1} href="/users">
             Users
           </NavItem>
+          <NavItem eventKey={1} href="#" onClick={props.signout}>
+            Sign out
+          </NavItem>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
