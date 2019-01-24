@@ -18,7 +18,7 @@ const NavigationBar = props => {
           <NavItem eventKey={1} href="/login">
             Log in
           </NavItem>
-          <NavItem eventKey={2} href="#">
+          <NavItem eventKey={2} href="/register">
             Sign Up
           </NavItem>
         </Nav>

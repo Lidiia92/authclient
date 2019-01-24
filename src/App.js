@@ -3,6 +3,7 @@ import './App.css';
 import NavBar from "./components/NavBar.js";
 import UsersList from './components/UsersList.js';
 import Login from './components/Login';
+import Register from './components/Register.js';
 import { Route } from 'react-router-dom';
 
 class App extends Component {
@@ -29,6 +30,10 @@ class App extends Component {
         <Route 
           path="/login" 
           render={props => <Login /> } /> 
+
+        <Route 
+          path="/register" 
+          render={props => <Register /> } /> 
 
         </main>
       </div>
